@@ -1,0 +1,71 @@
+/* src/styles.css */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  background-color: #f9f9f9;
+}
+
+.navbar {
+  background: linear-gradient(90deg, #8E2DE2, #4A00E0);
+}
+
+.navbar .nav-link,
+.navbar .navbar-brand {
+  color: white !important;
+}
+
+.navbar .dropdown-menu {
+  background-color: #6a1b9a;
+}
+
+.dropdown-item {
+  color: white;
+}
+
+.dropdown-item:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Estilo base dos links */
+.nav-link {
+    color: white !important;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    transition: all 0.3s ease;
+  }
+  
+  /* Hover nos links */
+  .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    transform: translateY(-2px);
+  }
+  
+  /* Estilo do dropdown */
+  .navbar .dropdown-menu {
+    background-color: #6a1b9a;
+    border: none;
+    border-radius: 5px;
+    transition: opacity 0.3s ease;
+  }
+  
+  /* Itens do dropdown */
+  .dropdown-item {
+    color: white !important;
+    font-weight: 500;
+    transition: all 0.3s ease;
+  }
+  
+  /* Hover no item do dropdown */
+  .dropdown-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+  }
+  
+  /* Abre dropdown ao passar o mouse */
+  .nav-item.dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0;
+  }

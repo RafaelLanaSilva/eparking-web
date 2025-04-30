@@ -1,0 +1,183 @@
+/* Estilo geral do card de estacionamento */
+.card {
+    background-color: #fff; /* Cor de fundo branca */
+    border-radius: 8px; /* Bordas arredondadas */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombras suaves */
+    padding: 1.5rem; /* Espaçamento interno */
+    max-width: 400px; /* Largura máxima do card */
+    margin: 1rem; /* Margem ao redor do card */
+    transition: transform 0.3s ease; /* Animação de transformação suave */
+  }
+  
+  /* Efeito de hover no card */
+  .card:hover {
+    transform: scale(1.05); /* Aumenta um pouco o card ao passar o mouse */
+  }
+  
+  /* Estilo do título do card (Nome do Estacionamento) */
+  .card_title {
+    font-family: 'Poppins', sans-serif; /* Fonte personalizada */
+    font-weight: 600;
+    font-size: 1.5rem;
+    color: #ffffff; /* Cor roxa */
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Estilo do parágrafo (Endereço) */
+  .card_paragraph {
+    font-size: 1rem;
+    color: #777; /* Cor cinza para o endereço */
+    margin-bottom: 1rem;
+  }
+  
+  /* Linha horizontal entre título e lista */
+  .line {
+    border: 0;
+    border-top: 1px solid #eee; /* Linha bem sutil */
+    margin: 1rem 0;
+  }
+  
+  /* Estilo da lista de vagas */
+  .card__list {
+    list-style-type: none; /* Remove o marcador da lista */
+    padding: 0;
+  }
+  
+  .card__list_item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  
+  /* Ícone de check verde */
+  .check {
+    color: #28a745; /* Verde para os checkmarks */
+    margin-right: 0.5rem;
+  }
+  
+  .check_svg {
+    width: 16px;
+    height: 16px;
+  }
+  
+  /* Texto das informações da lista */
+  .list_text {
+    font-size: 1rem;
+    color: #333; /* Cor do texto */
+    font-weight: 500;
+  }
+  
+  /* Estilo do botão */
+  .button {
+    background-color: #4a00e0; /* Cor roxa */
+    border: none;
+    padding: 0.75rem 1.5rem;
+    color: white;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .button:hover {
+    background-color: #8e2de2; /* Tom mais claro de roxo */
+  }
+  
+  /* Estilo do Card */
+  .card {
+    --white: #ffffff;
+    --black: #1a1a1a;
+    --paragraph: #d1d1d1;
+    --line: #3a3a3a;
+    --primary: #8E2DE2;
+  
+    font-family: 'Poppins', sans-serif;
+    position: relative;
+  
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem; /* reduzido de 1rem para 0.75rem */
+  
+    padding: 1rem;
+    width: 19rem;
+    background: linear-gradient(145deg, #4A00E0 0%, #8E2DE2 100%);
+    border-radius: 1rem;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+    color: var(--white);
+    transition: transform 0.3s ease;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .card .card_title__container .card_title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #ffffff; /* branco puro */
+    margin: 0; /* remove espaçamento extra */
+  }
+  
+  .card .card_title__container .card_paragraph {
+    margin: 0.2rem 0 0; /* reduzido o espaçamento inferior */
+    font-size: 0.875rem;
+    color: var(--paragraph);
+  }
+  
+  .card .line {
+    width: 100%;
+    height: 1px;
+    background-color: var(--line);
+    border: none;
+  }
+  
+  .card .card__list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem; /* um pouco menor */
+  }
+  
+  .card .card__list_item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .card .check {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 1rem;
+    height: 1rem;
+    background-color: var(--white);
+    border-radius: 50%;
+  }
+  
+  .card .check .check_svg {
+    width: 0.75rem;
+    height: 0.75rem;
+    fill: var(--primary);
+  }
+  
+  .card .list_text {
+    font-size: 0.875rem;
+  }
+  
+  .card .button {
+    cursor: pointer;
+    padding: 0.5rem;
+    width: 100%;
+    background: linear-gradient(to right, #4A00E0, #8E2DE2);
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: white;
+    border: none;
+    border-radius: 9999px;
+    transition: background 0.3s ease;
+  }
+  
+  .card .button:hover {
+    background: linear-gradient(to right, #6A00E0, #9F2DE2);
+  }
+  
+  

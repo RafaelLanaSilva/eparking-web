@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  background-color: #f9f9f9;
+}
+
+/* Estilo geral do card de cadastro */
+.card {
+    background-color: #f9f9f9; /* Cor de fundo clara para o card */
+    border-radius: 8px; /* Bordas arredondadas */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombras suaves */
+    padding: 2rem; /* Espaçamento interno */
+    max-width: 900px; /* Largura máxima do card */
+    margin: 2rem auto; /* Centralização */
+}
+
+/* Título da página */
+.card h2 {
+    font-family: 'Poppins', sans-serif; /* Fonte personalizada */
+    font-weight: 600; /* Deixa o título mais forte */
+    font-size: 2rem;
+    margin-bottom: 1.5rem; /* Espaçamento abaixo do título */
+    color: #4a00e0; /* Cor roxa do título */
+}
+
+/* Alinhamento e estilo dos campos de formulário */
+.form-label {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #333; /* Cor de texto suave */
+}
+
+/* Estilo dos campos de input */
+.form-control {
+    border-radius: 5px; /* Bordas arredondadas */
+    padding: 0.75rem; /* Espaçamento dentro dos campos */
+    border: 1px solid #ddd; /* Borda cinza suave */
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1); /* Sombras internas suaves */
+    transition: all 0.3s ease; /* Efeito de transição suave */
+}
+
+/* Efeito de foco nos campos */
+.form-control:focus {
+    border-color: #4a00e0; /* Cor do foco roxa */
+    box-shadow: 0 0 5px rgba(74, 0, 224, 0.5); /* Sombra de foco */
+}
+
+/* Estilo dos botões */
+.btn-primary {
+    background-color: #4a00e0; /* Cor roxa para o botão */
+    border-color: #4a00e0; /* Borda do botão */
+    color: #fff; /* Texto branco */
+    font-weight: 600; /* Texto em negrito */
+    padding: 0.75rem 1.5rem; /* Tamanho adequado para o botão */
+    border-radius: 5px; /* Bordas arredondadas */
+    transition: all 0.3s ease; /* Transição suave */
+}
+
+/* Efeito de hover no botão */
+.btn-primary:hover {
+    background-color: #8e2de2; /* Tom de roxo mais claro ao passar o mouse */
+    border-color: #8e2de2; /* Borda mais clara ao passar o mouse */
+}
+
+/* Estilo para o alinhamento do botão de envio */
+.d-flex {
+    display: flex;
+    justify-content: flex-end; /* Alinha o botão à direita */
+}
+
+/* Espaçamento entre os campos no formulário */
+.row.mb-3 {
+    margin-bottom: 1.5rem; /* Espaço entre as linhas */
+}
+
+/* Ajuste no layout das colunas para um melhor alinhamento */
+.col-md-4, .col-md-6, .col-md-2 {
+    margin-bottom: 1.2rem; /* Espaço entre as colunas */
+}
+
+/* Estilo para os campos de número (ex: Vagas) */
+input[type="number"] {
+    -moz-appearance: textfield; /* Remover setas de número no Firefox */
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none; /* Remover setas no Chrome/Safari */
+    margin: 0;
+}
