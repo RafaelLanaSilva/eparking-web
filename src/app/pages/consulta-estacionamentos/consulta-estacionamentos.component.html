@@ -1,209 +1,28 @@
-<link
-  rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-/>
-
-
 <div class="container mt-4">
-    <div class="row g-4">
-      <div class="col-12 col-sm-6 col-md-4">
-        <!-- Estacionamento 1 -->
-<div class="card">
-    <div class="card__border"></div>
-    <div class="card_title__container">
-      <span class="card_title">Estacionamento Central</span>
-      <p class="card_paragraph">Endereço: Rua Principal, 123</p>
-    </div>
-    <hr class="line" />
-    <ul class="card__list">
-      <li class="card__list_item">
-        <span class="check">
-          <svg
-            class="check_svg"
-            fill="currentColor"
-            viewBox="0 0 16 16"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              clip-rule="evenodd"
-              d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"
-              fill-rule="evenodd"
-            ></path>
-          </svg>
-        </span>
-        <span class="list_text">Vagas para Carros: 30</span>
-      </li>
-      <li class="card__list_item">
-        <span class="check">
-          <svg
-            class="check_svg"
-            fill="currentColor"
-            viewBox="0 0 16 16"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              clip-rule="evenodd"
-              d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"
-              fill-rule="evenodd"
-            ></path>
-          </svg>
-        </span>
-        <span class="list_text">Vagas para Motocicletas: 15</span>
-      </li>
-      <li class="card__list_item">
-        <span class="check">
-          <svg
-            class="check_svg"
-            fill="currentColor"
-            viewBox="0 0 16 16"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              clip-rule="evenodd"
-              d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"
-              fill-rule="evenodd"
-            ></path>
-          </svg>
-        </span>
-        <span class="list_text">Vagas Preferenciais: 5</span>
-      </li>
-    </ul>
-    <button class="button">Ver Detalhes</button>
-  </div>
+  <div class="row">
+    <div class="col-md-4 mb-4" *ngFor="let est of estacionamentos">
+      <div class="card shadow-sm rounded">
+        <div class="card-body">
+          <h5 class="card-title">{{ est.nome || 'Estacionamento sem nome' }}</h5>
+          <p class="card-text">
+            <strong>Endereço:</strong> {{ est.endereco || 'Não informado' }}
+          </p>
+          <div class="d-flex justify-content-between text-center">
+            <div>
+              <i class="fas fa-car text-primary"></i>
+              <div>{{ est.quantidadeVagasCarro || 0 }} carros</div>
+            </div>
+            <div>
+              <i class="fas fa-motorcycle text-success"></i>
+              <div>{{ est.quantidadeVagasMotocicleta || 0 }} motos</div>
+            </div>
+            <div>
+              <i class="fas fa-wheelchair text-warning"></i>
+              <div>{{ est.quantidadeVagasPreferencial || 0 }} pref.</div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="col-12 col-sm-6 col-md-4">
-        <!-- Estacionamento 2 -->
-  <div class="card">
-    <div class="card__border"></div>
-    <div class="card_title__container">
-      <span class="card_title">Estacionamento Sul</span>
-      <p class="card_paragraph">Endereço: Avenida do Sol, 456</p>
-    </div>
-    <hr class="line" />
-    <ul class="card__list">
-      <li class="card__list_item">
-        <span class="check">
-          <svg
-            class="check_svg"
-            fill="currentColor"
-            viewBox="0 0 16 16"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              clip-rule="evenodd"
-              d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"
-              fill-rule="evenodd"
-            ></path>
-          </svg>
-        </span>
-        <span class="list_text">Vagas para Carros: 40</span>
-      </li>
-      <li class="card__list_item">
-        <span class="check">
-          <svg
-            class="check_svg"
-            fill="currentColor"
-            viewBox="0 0 16 16"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              clip-rule="evenodd"
-              d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"
-              fill-rule="evenodd"
-            ></path>
-          </svg>
-        </span>
-        <span class="list_text">Vagas para Motocicletas: 20</span>
-      </li>
-      <li class="card__list_item">
-        <span class="check">
-          <svg
-            class="check_svg"
-            fill="currentColor"
-            viewBox="0 0 16 16"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              clip-rule="evenodd"
-              d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"
-              fill-rule="evenodd"
-            ></path>
-          </svg>
-        </span>
-        <span class="list_text">Vagas Preferenciais: 10</span>
-      </li>
-    </ul>
-    <button class="button">Ver Detalhes</button>
-  </div>
-  
-      </div>
-      <div class="col-12 col-sm-6 col-md-4">
-        <!-- Estacionamento 2 -->
-  <div class="card">
-    <div class="card__border"></div>
-    <div class="card_title__container">
-      <span class="card_title">Go Garagem</span>
-      <p class="card_paragraph">Endereço: Avenida do Sol, 456</p>
-    </div>
-    <hr class="line" />
-    <ul class="card__list">
-      <li class="card__list_item">
-        <span class="check">
-          <svg
-            class="check_svg"
-            fill="currentColor"
-            viewBox="0 0 16 16"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              clip-rule="evenodd"
-              d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"
-              fill-rule="evenodd"
-            ></path>
-          </svg>
-        </span>
-        <span class="list_text">Vagas para Carros: 40</span>
-      </li>
-      <li class="card__list_item">
-        <span class="check">
-          <svg
-            class="check_svg"
-            fill="currentColor"
-            viewBox="0 0 16 16"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              clip-rule="evenodd"
-              d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"
-              fill-rule="evenodd"
-            ></path>
-          </svg>
-        </span>
-        <span class="list_text">Vagas para Motocicletas: 20</span>
-      </li>
-      <li class="card__list_item">
-        <span class="check">
-          <svg
-            class="check_svg"
-            fill="currentColor"
-            viewBox="0 0 16 16"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              clip-rule="evenodd"
-              d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"
-              fill-rule="evenodd"
-            ></path>
-          </svg>
-        </span>
-        <span class="list_text">Vagas Preferenciais: 10</span>
-      </li>
-    </ul>
-    <button class="button">Ver Detalhes</button>
-  </div>
-  
-      </div>
-      <!-- Adicione mais colunas conforme necessário -->
     </div>
   </div>
-  
+</div>
