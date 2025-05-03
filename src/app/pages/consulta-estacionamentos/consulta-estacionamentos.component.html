@@ -1,16 +1,16 @@
 <div class="container mt-4">
   <div class="row">
     <div class="col-md-4 mb-4" *ngFor="let est of estacionamentos">
-      <div class="card shadow-sm rounded">
-        <div class="card-body">
+      <div class="card shadow-sm rounded h-100 d-flex flex-column justify-content-between">
+        <div class="card-body d-flex flex-column">
           <h5 class="card-title">{{ est.nome || 'Estacionamento sem nome' }}</h5>
           <p class="card-text">
             <strong>Endereço:</strong> {{ est.endereco || 'Não informado' }}
           </p>
-          <div class="d-flex justify-content-between text-center">
+          <div class="d-flex justify-content-between text-center mb-3">
             <div>
               <i class="fas fa-car text-primary"></i>
-              <div>{{ est.quantidadeVagasCarro || 0 }} carros</div>
+              <div>{{ est.quantidadeVagasCarro || 0 }} carros</div>             
             </div>
             <div>
               <i class="fas fa-motorcycle text-success"></i>
@@ -21,6 +21,12 @@
               <div>{{ est.quantidadeVagasPreferencial || 0 }} pref.</div>
             </div>
           </div>
+          <div class="mt-auto text-center">
+            <button class="btn btn-gerenciar">
+              <i class="fas fa-cogs me-1"></i> Gerenciar
+            </button>
+          </div>
+          
         </div>
       </div>
     </div>
