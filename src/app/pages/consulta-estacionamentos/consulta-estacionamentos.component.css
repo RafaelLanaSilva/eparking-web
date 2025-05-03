@@ -179,5 +179,24 @@
   .card .button:hover {
     background: linear-gradient(to right, #6A00E0, #9F2DE2);
   }
+
+  .btn-gerenciar {
+    background-color: #8E2DE2;
+    color: white;
+    font-weight: 500;
+    border: none;
+    border-radius: 10px;
+    padding: 0.5rem 1.2rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .btn-gerenciar:hover {
+    background-color: #4A00E0;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(74, 0, 224, 0.3);
+  }
+  
+  
   
   

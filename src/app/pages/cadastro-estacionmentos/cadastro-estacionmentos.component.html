@@ -1,75 +1,125 @@
 <div class="card shadow p-4">
-    <h2 class="mb-4">Cadastro de Estacionamento</h2>
-  
-    <form>
-      <!-- Nome do Estacionamento -->
-      <div class="row mb-3">
-        <div class="col-md-12">
-          <label for="nome" class="form-label">Nome do Estacionamento</label>
-          <input type="text" id="nome" class="form-control" placeholder="Digite o nome">
-        </div>
-      </div>
-  
-      <!-- Endereço detalhado -->
-      <div class="row mb-3">
-        <div class="col-md-6">
-          <label for="logradouro" class="form-label">Logradouro</label>
-          <input type="text" id="logradouro" class="form-control" placeholder="Ex: Rua das Flores">
-        </div>
-        <div class="col-md-2">
-          <label for="numero" class="form-label">Número</label>
-          <input type="text" id="numero" class="form-control" placeholder="Ex: 123">
-        </div>
-        <div class="col-md-4">
-          <label for="complemento" class="form-label">Complemento</label>
-          <input type="text" id="complemento" class="form-control" placeholder="Opcional">
-        </div>
-      </div>
-  
-      <!-- CEP -->
-      <div class="row mb-3">
-        <div class="col-md-4">
-          <label for="cep" class="form-label">CEP</label>
-          <input type="text" id="cep" class="form-control" placeholder="Ex: 12345-678">
-        </div>
-      </div>
-  
-      <!-- Quantidade de Vagas -->
-      <div class="row mb-3">
-        <div class="col-md-4">
-          <label for="vagasCarro" class="form-label">Vagas para Carro</label>
-          <input type="number" id="vagasCarro" class="form-control" min="0">
-        </div>
-        <div class="col-md-4">
-          <label for="vagasMoto" class="form-label">Vagas para Motocicleta</label>
-          <input type="number" id="vagasMoto" class="form-control" min="0">
-        </div>
-        <div class="col-md-4">
-          <label for="vagasPref" class="form-label">Vagas Preferenciais</label>
-          <input type="number" id="vagasPref" class="form-control" min="0">
-        </div>
-      </div>
-  
-      <!-- Tarifas -->
-      <div class="row mb-3">
-        <div class="col-md-4">
-          <label for="tarifaHora" class="form-label">Valor por Hora (R$)</label>
-          <input type="number" id="tarifaHora" class="form-control" step="0.01" min="0">
-        </div>
-        <div class="col-md-4">
-          <label for="tarifaFracao" class="form-label">Valor da Fração (R$)</label>
-          <input type="number" id="tarifaFracao" class="form-control" step="0.01" min="0">
-        </div>
-        <div class="col-md-4">
-          <label for="tolerancia" class="form-label">Tolerância (minutos)</label>
-          <input type="number" id="tolerancia" class="form-control" min="0">
-        </div>
-      </div>
-  
-      <!-- Botão de Envio -->
-      <div class="d-flex justify-content-end">
-        <button type="submit" class="btn btn-primary">Cadastrar Estacionamento</button>
-      </div>
-    </form>
+  <h2 class="mb-4">Cadastro de Estacionamento</h2>
+
+  <!-- mensagem de sucesso -->
+  <div *ngIf="mensagemSucesso" class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>Sucesso!</strong> {{ mensagemSucesso }}
+    <button (click)="mensagemSucesso = ''" type="button" class="btn-close" aria-label="Close"></button>
   </div>
-  
+
+  <!-- mensagem de erro -->
+  <div *ngIf="mensagemErro" class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Erro!</strong> {{ mensagemErro }}
+    <button (click)="mensagemErro = ''" type="button" class="btn-close" aria-label="Close"></button>
+  </div>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <!-- Nome do Estacionamento -->
+    <div class="row mb-3">
+      <div class="col-md-12">
+        <label for="nome" class="form-label">Nome do Estacionamento</label>
+        <input type="text" id="nome" class="form-control" placeholder="Digite o nome" formControlName="nome">
+        <div class="text-danger" *ngIf="f['nome'].touched && f['nome'].invalid">
+          <small>Por favor, informe o nome com pelo menos 5 caracteres</small>
+        </div>
+      </div>
+    </div>
+
+    <!-- Endereço detalhado -->
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label for="logradouro" class="form-label">Logradouro</label>
+        <input type="text" id="logradouro" class="form-control" placeholder="Ex: Rua das Flores" formControlName="logradouro">
+        <div class="text-danger" *ngIf="f['logradouro'].touched && f['logradouro'].invalid">
+          <small>Por favor, informe o logradourocom pelo menos 5 caracteres</small>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <label for="numero" class="form-label">Número</label>
+        <input type="text" id="numero" class="form-control" placeholder="Ex: 123" formControlName="numero">
+        <div class="text-danger" *ngIf="f['numero'].touched && f['numero'].invalid">
+          <small>Por favor, para endereços sem número, digite 0</small>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <label for="complemento" class="form-label">Complemento</label>
+        <input type="text" id="complemento" class="form-control" placeholder="Opcional" formControlName="complemento">
+      </div>
+    </div>
+
+    <div class="row mb-4">
+      <div class="col-md-3">
+        <label for="uf" class="form-label">UF</label>
+        <select id="uf" class="form-select" formControlName="uf">
+          <option value="">Selecione</option>
+          <option *ngFor="let estado of estados" [value]="estado.sigla">{{ estado.nome }}</option>
+        </select>
+        <div class="text-danger" *ngIf="f['uf'].touched && f['uf'].invalid">
+          <small>Por favor, selecione um estado</small>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <label for="cep" class="form-label">CEP</label>
+        <input type="text" id="cep" class="form-control" placeholder="Ex: 12345-678" formControlName="cep">
+        <div class="text-danger" *ngIf="f['cep'].touched && f['cep'].invalid">
+          <small>CEP inválido</small>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Quantidade de Vagas -->
+    <div class="row mb-3">
+      <div class="col-md-4">
+        <label for="vagasCarro" class="form-label">Vagas para Carro</label>
+        <input type="number" id="vagasCarro" class="form-control" formControlName="quantidadeVagasCarro" min="0">
+        <div class="text-danger" *ngIf="f['quantidadeVagasCarro'].touched && f['quantidadeVagasCarro'].invalid">
+          <small>Por favor, informe a quantidade de vagas para carros</small>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <label for="vagasMoto" class="form-label">Vagas para Motocicleta</label>
+        <input type="number" id="vagasMoto" class="form-control" formControlName="quantidadeVagasMotocicleta" min="0">
+        <div class="text-danger" *ngIf="f['quantidadeVagasMotocicleta'].touched && f['quantidadeVagasMotocicleta'].invalid">
+          <small>Por favor, informe a quantidade de vagas para motocicletas</small>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <label for="vagasPref" class="form-label">Vagas Preferenciais</label>
+        <input type="number" id="vagasPref" class="form-control" formControlName="quantidadeVagasPreferencial" min="0">
+        <div class="text-danger" *ngIf="f['quantidadeVagasPreferencial'].touched && f['quantidadeVagasPreferencial'].invalid">
+          <small>Por favor, informe a quantidade de vagas preferenciais (Idosos e PCD)</small>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tarifas -->
+    <div class="row mb-3">
+      <div class="col-md-4">
+        <label for="tarifaHora" class="form-label">Valor por Hora (R$)</label>
+        <input type="number" id="tarifaHora" class="form-control" formControlName="valorHora" step="0.01" min="0">
+        <div class="text-danger" *ngIf="f['valorHora'].touched && f['valorHora'].invalid">
+          <small>Por favor, informe o valor cobrado por hora.</small>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <label for="tarifaFracao" class="form-label">Valor da Fração (R$)</label>
+        <input type="number" id="tarifaFracao" class="form-control" formControlName="valorFracao" step="0.01" min="0">
+        <div class="text-danger" *ngIf="f['valorFracao'].touched && f['valorFracao'].invalid">
+          <small>Por favor, informe o valor cobrado pela fração.</small>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <label for="tolerancia" class="form-label">Tolerância (minutos)</label>
+        <input type="number" id="tolerancia" class="form-control" formControlName="toleranciaMinutos" min="0">
+        <div class="text-danger" *ngIf="f['toleranciaMinutos'].touched && f['toleranciaMinutos'].invalid">
+          <small>Por favor, informe o tempo de tolerancia</small>
+        </div>
+      </div>
+    </div>
+
+    <!-- Botão de Envio -->
+    <div class="d-flex justify-content-end">
+      <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Cadastrar Estacionamento</button>
+    </div>
+  </form>
+</div>
