@@ -3,6 +3,7 @@ import { Routes } from '@angular/router';
 import { CadastroEstacionmentosComponent } from './pages/cadastro-estacionmentos/cadastro-estacionmentos.component';
 import { ConsultaEstacionamentosComponent } from './pages/consulta-estacionamentos/consulta-estacionamentos.component';
 import { ConsultaVagasComponent } from './pages/consulta-vagas/consulta-vagas.component';
+import { GerenciarEstacionamentosComponent } from './pages/gerenciar-estacionamentos/gerenciar-estacionamentos.component';
 
 export const routes: Routes = [
     {
@@ -16,5 +17,9 @@ export const routes: Routes = [
     {
         path: 'pages/consulta-vagas',
         component: ConsultaVagasComponent
+    },
+    {
+        path: 'pages/gerenciar-estacionamentos/:id',
+        component: GerenciarEstacionamentosComponent
     }
 ];
