@@ -1,0 +1,142 @@
+/* Estilo geral da página */
+body {
+  background-color: #f4f4f4;
+  color: #333;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Cards com fundo claro, sombra suave e borda lateral roxa */
+.card {
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-left: 5px solid #8e2de2;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  color: #333;
+}
+
+/* Card de tarifa com borda violeta */
+.card:nth-of-type(2) {
+  border-left-color: #6f42c1;
+}
+
+/* Título do card */
+.card-title {
+  color: #4a00e0;
+  font-weight: 600;
+}
+
+/* Títulos internos (Ex: Endereço, Vagas) */
+.card h5 {
+  color: #555;
+  font-weight: 500;
+}
+
+/* Ícones modernos */
+.card-title i,
+.card h5 i {
+  color: #8e2de2;
+  margin-right: 8px;
+  font-size: 1.2rem;
+  vertical-align: middle;
+}
+
+/* Listas dentro dos cards */
+.card ul li {
+  margin-bottom: 6px;
+}
+
+/* Botões com as cores da identidade visual */
+.btn-primary {
+  background-color: #8e2de2;
+  border-color: #8e2de2;
+  font-weight: 500;
+}
+
+.btn-primary:hover {
+  background-color: #6a1bbd;
+  border-color: #6a1bbd;
+}
+
+.btn-secondary {
+  background-color: #6f42c1;
+  border-color: #6f42c1;
+  font-weight: 500;
+}
+
+.btn-secondary:hover {
+  background-color: #59359c;
+  border-color: #59359c;
+}
+
+/* Alertas com contraste claro e visual limpo */
+.alert-success {
+  background-color: #d4edda;
+  color: #155724;
+  border: none;
+}
+
+.alert-danger {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: none;
+}
+
+/* Texto auxiliar */
+.text-muted {
+  color: #000000 !important;
+}
+
+
+/* Estilo para os títulos (h5) com ícones */
+h5.text-secondary {
+color: #000000; /* Cor cinza suave para o título */
+font-size: 1.2rem; /* Tamanho do texto */
+font-weight: 600; /* Deixa o texto mais grosso */
+display: flex;
+align-items: center;
+}
+
+h5.text-secondary i {
+margin-right: 8px; /* Espaço entre o ícone e o texto */
+font-size: 1.4rem; /* Tamanho do ícone */
+color: #000000; /* Cor do ícone */
+}
+
+/* Estilo do parágrafo (endereço) */
+p {
+color: #000000; /* Texto em cinza escuro */
+font-size: 1rem; /* Tamanho do texto */
+margin-top: 0.5rem; /* Distância entre o título e o parágrafo */
+}
+
+/* Estilo para a lista de vagas */
+ul.mb-3 {
+list-style: none; /* Remove as bolinhas da lista */
+padding-left: 0; /* Remove o espaçamento da esquerda */
+color: #000000; /* Texto das vagas em cinza escuro */
+font-size: 1rem; /* Tamanho do texto */
+}
+
+ul.mb-3 li {
+margin-bottom: 0.5rem; /* Espaçamento entre os itens da lista */
+}
+
+ul.mb-3 li strong {
+font-weight: 600; /* Deixa o texto "Carros", "Motocicletas", etc. em negrito */
+color: #000000; /* Cor do texto em negrito, mais escuro */
+}
+
+/* Estilo personalizado para os modais */
+.modal-header {
+  background-color: #6f42c1;
+  color: white;
+}
+
+.modal-body {
+  background-color: #f8f9fa;
+}
+
+.modal-footer {
+  background-color: #f1f3f5;
+}

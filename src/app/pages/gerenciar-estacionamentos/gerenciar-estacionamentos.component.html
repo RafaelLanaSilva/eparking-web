@@ -1,0 +1,115 @@
+<div class="container mt-4">
+  <!-- Card: Informações do Estacionamento -->
+  <div class="card shadow-sm mb-4" style="border-left: 5px solid #8E2DE2;">
+    <div class="card-body">
+      <h2 class="card-title text-dark">
+        <i class="ri-store-line"></i> {{ estacionamento?.nome }}
+      </h2>
+
+      <h5 class="mt-3 text-secondary"><i class="ri-map-pin-line"></i> Endereço:</h5>
+      <p>{{ estacionamento?.endereco }}</p>
+
+      <h5 class="mt-4 text-secondary"><i class="ri-car-line"></i> Quantidade de Vagas:</h5>
+      <ul class="mb-3">
+        <li><strong>Carros:</strong> {{ estacionamento?.quantidadeVagasCarro }}</li>
+        <li><strong>Motocicletas:</strong> {{ estacionamento?.quantidadeVagasMotocicleta }}</li>
+        <li><strong>Preferenciais:</strong> {{ estacionamento?.quantidadeVagasPreferencial }}</li>
+      </ul>
+
+      <button class="btn btn-outline-primary" (click)="openEditarEstacionamento(modalEditarEstacionamento)">
+        <i class="ri-edit-line"></i> Editar Estacionamento
+      </button>
+    </div>
+  </div>
+
+  <!-- Card: Tarifas -->
+  <div class="card shadow-sm mb-4" style="border-left: 5px solid #6f42c1;">
+    <div class="card-body">
+      <h4 class="card-title text-dark">
+        <i class="ri-money-dollar-circle-line"></i> Tarifas Cadastradas:
+      </h4>
+      <ul class="mb-3">
+        <li><strong>Valor por Hora:</strong> R$ {{ tarifa?.valorHora }}</li>
+        <li><strong>Valor por Fração:</strong> R$ {{ tarifa?.valorFracao }}</li>
+        <li><strong>Tolerância em Minutos:</strong> {{ tarifa?.toleranciaMinutos }} minutos</li>
+      </ul>
+
+      <button class="btn btn-outline-secondary" (click)="openEditarTarifa(modalEditarTarifa)">
+        <i class="ri-money-dollar-circle-line"></i> Editar Tarifa
+      </button>
+    </div>
+  </div>
+
+  <!-- Mensagens -->
+  <div class="row mt-4">
+    <div class="col">
+      <div *ngIf="mensagemSucesso" class="alert alert-success">
+        {{ mensagemSucesso }}
+      </div>
+      <div *ngIf="mensagemErro" class="alert alert-danger">
+        {{ mensagemErro }}
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #modalEditarEstacionamento let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title">Editar Estacionamento</h5>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss()"></button>
+  </div>
+  <div class="modal-body">
+    <div class="mb-3">
+      <label>Nome:</label>
+      <input class="form-control" [(ngModel)]="estacionamento.nome" />
+    </div>
+    <div class="mb-3">
+      <label>Endereço:</label>
+      <input class="form-control" [(ngModel)]="estacionamento.endereco" />
+    </div>
+    <div class="mb-3">
+      <label>Vagas Carro:</label>
+      <input type="number" class="form-control" [(ngModel)]="estacionamento.quantidadeVagasCarro" />
+    </div>
+    <div class="mb-3">
+      <label>Vagas Moto:</label>
+      <input type="number" class="form-control" [(ngModel)]="estacionamento.quantidadeVagasMotocicleta" />
+    </div>
+    <div class="mb-3">
+      <label>Vagas Preferenciais:</label>
+      <input type="number" class="form-control" [(ngModel)]="estacionamento.quantidadeVagasPreferencial" />
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-secondary" (click)="modal.close()">Cancelar</button>
+    <button class="btn btn-primary" (click)="updateEstacionamento(); modal.close()">Salvar</button>
+  </div>
+</ng-template>
+
+
+<ng-template #modalEditarTarifa let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title">Editar Tarifa</h5>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss()"></button>
+  </div>
+  <div class="modal-body">
+    <div class="mb-3">
+      <label>Valor Hora:</label>
+      <input type="number" class="form-control" [(ngModel)]="tarifa.valorHora" />
+    </div>
+    <div class="mb-3">
+      <label>Valor Fração:</label>
+      <input type="number" class="form-control" [(ngModel)]="tarifa.valorFracao" />
+    </div>
+    <div class="mb-3">
+      <label>Tolerância (minutos):</label>
+      <input type="number" class="form-control" [(ngModel)]="tarifa.toleranciaMinutos" />
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-secondary" (click)="modal.close()">Cancelar</button>
+    <button class="btn btn-primary" (click)="updateTarifa(); modal.close()">Salvar</button>
+  </div>
+</ng-template>
+
+

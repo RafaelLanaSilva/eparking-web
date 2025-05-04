@@ -22,11 +22,10 @@
             </div>
           </div>
           <div class="mt-auto text-center">
-            <button class="btn btn-gerenciar">
+            <a class="btn btn-gerenciar" [routerLink]="['/pages/gerenciar-estacionamentos', est.id]">
               <i class="fas fa-cogs me-1"></i> Gerenciar
-            </button>
-          </div>
-          
+            </a>            
+          </div>          
         </div>
       </div>
     </div>

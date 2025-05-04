@@ -2,11 +2,13 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { environment } from '../../../environments/environment';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-consulta-estacionamentos',
   imports: [
     CommonModule,
+    RouterLink
   ],
   templateUrl: './consulta-estacionamentos.component.html',
   styleUrl: './consulta-estacionamentos.component.css'
