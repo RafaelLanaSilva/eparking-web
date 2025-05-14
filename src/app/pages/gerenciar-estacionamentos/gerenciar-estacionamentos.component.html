@@ -53,6 +53,7 @@
   </div>
 </div>
 
+<!-- Modal de Editar Estacionamento -->
 <ng-template #modalEditarEstacionamento let-modal>
   <div class="modal-header">
     <h5 class="modal-title">Editar Estacionamento</h5>
@@ -86,7 +87,7 @@
   </div>
 </ng-template>
 
-
+<!-- Modal de Editar Tarifa -->
 <ng-template #modalEditarTarifa let-modal>
   <div class="modal-header">
     <h5 class="modal-title">Editar Tarifa</h5>
@@ -112,4 +113,9 @@
   </div>
 </ng-template>
 
-
+<!-- Botão de Gerenciar Vagas -->
+<div class="d-flex justify-content-end mt-3">
+  <a class="btn btn-outline-primary" [routerLink]="['/pages/controle-estacionamentos', estacionamento?.id]">
+    <i class="ri-car-line"></i> Gerenciar Vagas
+  </a>  
+</div>
