@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -10,7 +10,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   selector: 'app-gerenciar-estacionamentos',
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    RouterLink
   ],
   templateUrl: './gerenciar-estacionamentos.component.html',
   styleUrl: './gerenciar-estacionamentos.component.css'
@@ -82,5 +83,7 @@ export class GerenciarEstacionamentosComponent {
       console.log('Tarifa atualizada com sucesso');
     });
   }
+
+
 
 }

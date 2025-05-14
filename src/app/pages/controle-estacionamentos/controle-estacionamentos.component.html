@@ -1,0 +1,135 @@
+<div class="container mt-4">
+
+    <h2>Controle de Estacionamento</h2>
+  
+    <!-- Mensagens de sucesso e erro -->
+    <div *ngIf="mensagemSucesso" class="alert alert-success mt-3">
+      {{ mensagemSucesso }}
+    </div>
+    <div *ngIf="mensagemErro" class="alert alert-danger mt-3">
+      {{ mensagemErro }}
+    </div>
+
+    <!-- Pesquisa de veículo por placa -->
+    <div class="row mt-4">
+      <div class="col-md-6">
+        <label for="buscarPlaca" class="form-label">Buscar veículo por placa</label>
+        <div class="input-group">
+          <input type="text" id="buscarPlaca" [(ngModel)]="placaBusca" name="placaBusca" class="form-control" placeholder="Digite a placa">
+          <button class="btn btn-outline-primary" (click)="buscarPorPlaca()">Buscar</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Resultado da busca -->
+    <div *ngIf="veiculos && veiculos.length" class="mt-3">
+      <h5>Resultado da busca</h5>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Modelo</th>
+            <th>Placa</th>
+            <th>Cor</th>
+            <th>Tipo</th>
+            <th>Ação</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let veiculo of veiculos">
+            <td>{{ veiculo.modelo }}</td>
+            <td>{{ veiculo.placa }}</td>
+            <td>{{ veiculo.cor }}</td>
+            <td>{{ veiculo.tipoVeiculo }}</td>
+            <td>
+              <button class="btn btn-sm btn-warning" (click)="editarVeiculo(veiculo)">Editar</button>
+              <button class="btn btn-sm btn-danger" (click)="desocuparVeiculo(veiculo)" 
+                      [disabled]="!veiculo.horaEntrada || veiculo.horaSaida">
+                Desocupar
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Formulário de cadastro de veículo -->
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="mt-4">
+      <h5>Cadastro de Veículo</h5>
+  
+      <div class="row g-3">
+        <div class="col-md-3">
+          <label for="modelo" class="form-label">Modelo</label>
+          <input id="modelo" type="text" formControlName="modelo" class="form-control" [ngClass]="{ 'is-invalid': f.modelo.invalid && f.modelo.touched }">
+          <div *ngIf="f.modelo.invalid && f.modelo.touched" class="invalid-feedback">
+            Modelo é obrigatório.
+          </div>
+        </div>
+  
+        <div class="col-md-3">
+          <label for="placa" class="form-label">Placa</label>
+          <input id="placa" type="text" formControlName="placa" class="form-control" [ngClass]="{ 'is-invalid': f.placa.invalid && f.placa.touched }">
+          <div *ngIf="f.placa.invalid && f.placa.touched" class="invalid-feedback">
+            Placa é obrigatória.
+          </div>
+        </div>
+  
+        <div class="col-md-3">
+          <label for="cor" class="form-label">Cor</label>
+          <input id="cor" type="text" formControlName="cor" class="form-control" [ngClass]="{ 'is-invalid': f.cor.invalid && f.cor.touched }">
+          <div *ngIf="f.cor.invalid && f.cor.touched" class="invalid-feedback">
+            Cor é obrigatória.
+          </div>
+        </div>
+  
+        <div class="col-md-3">
+          <label for="tipoVeiculo" class="form-label">Tipo de Veículo</label>
+          <select id="tipoVeiculo" formControlName="tipoVeiculo" class="form-select" [ngClass]="{ 'is-invalid': f.tipoVeiculo.invalid && f.tipoVeiculo.touched }">
+            <option value="" disabled selected>Selecione</option>
+            <option [value]="1">Carro</option>
+            <option [value]="2">Motocicleta</option>
+          </select>
+          <div *ngIf="f.tipoVeiculo.invalid && f.tipoVeiculo.touched" class="invalid-feedback">
+            Tipo de veículo é obrigatório.
+          </div>
+        </div>
+      </div>
+  
+      <button type="submit" class="btn btn-primary mt-3">Cadastrar Veículo</button>
+    </form>
+  
+    <!-- Se veículo for cadastrado com sucesso, mostrar opções de vagas -->
+    <div *ngIf="vagas.length" class="mt-5">
+      <h5>Vagas disponíveis</h5>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Número</th>
+            <th>Tipo</th>
+            <th>Status</th>
+            <th>Ação</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let vaga of vagas">
+            <td>{{ vaga.numero }}</td>
+            <td>{{ vaga.tipoVaga }}</td>
+            <td>
+              <span [class.text-success]="!vaga.ocupado" [class.text-danger]="vaga.ocupado">
+                {{ vaga.ocupado ? 'Ocupada' : 'Livre' }}
+              </span>
+            </td>
+            <td>
+              <button 
+                class="btn btn-sm btn-success"
+                (click)="ocuparVaga(vaga.id)"
+                [disabled]="vaga.ocupado"
+              >
+                Ocupar
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+</div>

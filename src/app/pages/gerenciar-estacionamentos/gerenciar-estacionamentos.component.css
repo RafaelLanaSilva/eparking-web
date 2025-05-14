@@ -140,3 +140,33 @@ color: #000000; /* Cor do texto em negrito, mais escuro */
 .modal-footer {
   background-color: #f1f3f5;
 }
+
+/* Container do botão */
+.btn-primary.mt-3 {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Estilo do botão */
+.btn-outline-primary {
+  border: 2px solid #8E2DE2;
+  color: #8E2DE2;
+  font-weight: 600;
+  padding: 0.5rem 1.25rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  background-color: transparent;
+}
+
+/* Ícone no botão */
+.btn-outline-primary i {
+  margin-right: 8px;
+}
+
+/* Efeito hover */
+.btn-outline-primary:hover {
+  background-color: #8E2DE2;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(142, 45, 226, 0.3);
+}
