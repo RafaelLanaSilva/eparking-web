@@ -4,8 +4,8 @@ import { Component } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { ActivatedRoute } from '@angular/router';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { map } from 'rxjs/operators';
-import { forkJoin } from 'rxjs';
+import { switchMap, map, catchError } from 'rxjs/operators';
+import { forkJoin, of } from 'rxjs';
 
 
 @Component({
@@ -154,23 +154,54 @@ export class ControleEstacionamentosComponent {
         next: (data) => {
           this.estacionamentos = data;
         },
-        error: (e) => {
-          console.log(e.error);
-        }
       });
   }
 
   loadVagas(id: string) {
-    this.httpClient.get(`${environment.apiEparking}/vaga/estacionamento/${id}`)
-      .subscribe({
-        next: (data) => {
-          this.vagas = (data as any[]).sort((a, b) => a.numero - b.numero);
-        },
-        error: (e) => {
-          console.log(e.error);
-        }
-      });
-  }
+  this.httpClient.get<any[]>(`${environment.apiEparking}/vaga/estacionamento/${id}`)
+    .pipe(
+      switchMap(vagas => {
+        // Para cada vaga, montar um Observable que pega movimentação e veículo
+        const vagasComVeiculo$ = vagas.map(vaga => {
+          return this.httpClient.get<any[]>(`${environment.apiEparking}/movimentacao/vaga/${vaga.id}`).pipe(
+            switchMap(movs => {
+              const movimentacaoAberta = movs.find(m => !m.horaSaida);
+              if (movimentacaoAberta) {
+                return this.httpClient.get<any>(`${environment.apiEparking}/veiculo/${movimentacaoAberta.veiculoId}`).pipe(
+                  map(veiculo => {
+                    vaga.veiculo = veiculo; // adiciona o veículo na vaga
+                    return vaga;
+                  }),
+                  catchError(() => {
+                    vaga.veiculo = null;
+                    return of(vaga);
+                  })
+                );
+              } else {
+                vaga.veiculo = null;
+                return of(vaga);
+              }
+            }),
+            catchError(() => {
+              vaga.veiculo = null;
+              return of(vaga);
+            })
+          );
+        });
+
+        // forkJoin espera todos os observables e retorna array com vagas atualizadas
+        return forkJoin(vagasComVeiculo$);
+      })
+    )
+    .subscribe({
+      next: (vagasComVeiculo) => {
+        this.vagas = vagasComVeiculo.sort((a, b) => a.numero - b.numero);
+      },
+      error: (error) => {
+        console.error('Erro ao carregar vagas e veículos', error);
+      }
+    });
+}
 
   loadTarifas(id: string) {
     this.httpClient.get(`${environment.apiEparking}/tarifa/estacionamento/${id}`)
@@ -178,9 +209,6 @@ export class ControleEstacionamentosComponent {
         next: (data) => {
           this.tarifas = data as any[];
         },
-        error: (e) => {
-          console.log(e.error);
-        }
       });
   }
 
@@ -275,21 +303,35 @@ export class ControleEstacionamentosComponent {
               this.valorCobrado = valorCobrado;
               this.mensagemSucesso = "Veículo desocupado com sucesso!";
 
+              // Buscar a vaga completa para atualizar corretamente
               this.httpClient.get<any>(`${environment.apiEparking}/vaga/${movimentacaoAberta.vagaId}`)
                 .subscribe({
                   next: (vagaCompleta) => {
+                    // Montar o objeto exatamente conforme o esperado pelo backend
                     const vagaAtualizada = {
-                      ...vagaCompleta,
-                      ocupado: false
+                      id: vagaCompleta.id,
+                      numero: vagaCompleta.numero,
+                      tipoVaga: vagaCompleta.tipoVaga,
+                      ocupado: false,
+                      estacionamentoId: vagaCompleta.estacionamentoId
                     };
 
                     this.httpClient.put(`${environment.apiEparking}/vaga/${vagaAtualizada.id}`, vagaAtualizada)
                       .subscribe({
                         next: () => {
+                          // Atualiza localmente o status da vaga
+                          const index = this.vagas.findIndex(v => v.id === vagaAtualizada.id);
+                          if (index !== -1) {
+                            this.vagas[index].ocupado = false;
+                            this.vagas[index].veiculo = null;
+                            this.vagas = [...this.vagas];
+                          }
+
                           this.loadVagas(idEstacionamento!);
                           this.loadVeiculosPorPlaca(veiculo.placa);
                           this.veiculoEncontrado = null;
                           this.placaBuscada = '';
+                          this.mensagemSucesso += ' Vaga liberada com sucesso!';
                         },
                         error: () => {
                           this.mensagemErro = 'Erro ao atualizar status da vaga!';
@@ -310,7 +352,8 @@ export class ControleEstacionamentosComponent {
         this.mensagemErro = 'Erro ao buscar movimentações do veículo!';
       }
     });
-  }
+}
+
 
   loadVeiculosComMovimentacao() {
   const idEstacionamento = this.activatedRoute.snapshot.paramMap.get('id');
@@ -336,7 +379,7 @@ export class ControleEstacionamentosComponent {
         });
       }
     });
-}
+  }
 
 
 }
